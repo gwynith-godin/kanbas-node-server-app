@@ -11,11 +11,6 @@ export default function EnrollmentRoutes(app) {
         const enrollment = dao.enrollUserInCourse(userId, courseId);
         res.json(enrollment);
       });
-    app.get('api/enrollments/:userId/course', (req, res) => {
-        const { userId } = req.params;
-        const enrollments = dao.fetchEnrollmentsForUser(userId);
-        res.json(enrollments);
-      });
     app.delete('api/enrollments/:enrollmentId', (req, res) => {
         const { enrollmentId } = req.params;
         dao.unEnrollFromCourse(enrollmentId);
