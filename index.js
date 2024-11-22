@@ -9,6 +9,7 @@ import cors from "cors";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
+import Hello from "./Hello.js";
 
 const app = express();
 app.use(cors
@@ -33,6 +34,7 @@ const sessionOptions = {
   app.use(session(sessionOptions));
   
 app.use(express.json());
+Hello(app);
 UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
