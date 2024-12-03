@@ -4,9 +4,6 @@ import model from "./model.js";
 export function createCourse(course) {
   delete course._id;
   return model.create(course);
-  // const newCourse = { ...course, _id: Date.now().toString() };
-  // Database.courses = [...Database.courses, newCourse];
-  // return newCourse;
 }
 
 export function findAllCourses() {
