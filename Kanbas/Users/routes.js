@@ -23,7 +23,6 @@ export default function UserRoutes(app) {
     res.json(courses);
   };
   
-  
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
     res.json(user);
