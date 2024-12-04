@@ -26,7 +26,8 @@ const quizzesSchema = new mongoose.Schema(
     dueDate: Date,
     availableDate: Date,
     untilDate: Date,
-    numQuestions: Number
+    numQuestions: Number,
+    score: Number
  },
  {collection: "quizzes"}
 );

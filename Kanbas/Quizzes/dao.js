@@ -16,3 +16,5 @@ export function deleteQuiz(quizID) {
 export function findQuizzesForCourse(courseId) {
   return model.find({ course: courseId });
 }
+
+export const findQuizById = (quizId) => model.findById(quizId);
