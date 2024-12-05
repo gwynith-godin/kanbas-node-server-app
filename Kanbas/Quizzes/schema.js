@@ -18,16 +18,30 @@ const quizzesSchema = new mongoose.Schema(
     timeLimit : {type: Number, default: 20},
     multipleAttempts: {type: Boolean, default: false},
     howManyAttempts: {type: Number, default: 1, max: 5}, // doesnt need to be 5, change if needed
-    showCorrectAnswers: {type: Boolean, default: true},
+    showCorrectAnswers: {
+      type: String,
+      enum: ["Immediately", "After Last Attempt"],
+      default: "Immediately",
+    },
     accessCode: {type: String, default: ""},
     oneQuestionAtATime: {type: Boolean, default: true},
     webCamRequired: {type: Boolean, default: false},
     lockQuestionsAfterAnswering: {type: Boolean, default: false},
+    viewResponses: {
+      type: String,
+      enum: ["Always", "Never"],
+      default: "Always",
+    },
+    requireLockdownBrowser: {type: Boolean, default: false},
+    requiredToViewResults: {type: Boolean, default: false},
     dueDate: Date,
+    for: {
+      type: String, 
+      enum: ["Everyone", "Students", "Groups"], 
+      default: "Everyone"},
     availableDate: Date,
     untilDate: Date,
-    numQuestions: Number,
-    score: Number
+    numQuestions: Number
  },
  {collection: "quizzes"}
 );
