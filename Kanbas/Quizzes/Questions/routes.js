@@ -24,12 +24,12 @@ export default function QuestionsRoutes(app) {
     app.put("/api/quizzes/:quizId/question/:questionId", async (req, res) => {
         const { questionId } = req.params;
         const questionUpdates = req.body;
-        const updatedQuestion = await quizzesDao.updateQuestion(questionId, questionUpdates);
+        const updatedQuestion = await questionsDao.updateQuestion(questionId, questionUpdates);
         res.send(updatedQuestion);
     });
 
     app.get("/api/quizzes/:quizId/question/:questionId", async (req, res) => {
-        const question = await quizzesDao.findQuestionById(req.params.questionId);
+        const question = await questionsDao.findQuestionById(req.params.questionId);
         res.json(question);
     });
 

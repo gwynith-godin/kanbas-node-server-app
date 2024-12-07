@@ -39,8 +39,9 @@ const quizzesSchema = new mongoose.Schema(
       type: String, 
       enum: ["Everyone", "Students", "Groups"], 
       default: "Everyone"},
-    availableDate: Date,
-    untilDate: Date,
+
+    availableDate: { type: Date, default: Date.now }, // In case of no input
+    untilDate: { type: Date, default: null }, // In case of no input
     numQuestions: Number
  },
  {collection: "quizzes"}
