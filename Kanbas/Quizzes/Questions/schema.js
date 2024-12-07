@@ -14,6 +14,7 @@ const questionSchema = new mongoose.Schema({
   title: { type: String, required: true },
   points: { type: Number, default: 0 },
   question: { type: String, default: "" },
+  correctAnswer: { type: String, required: false },
 
   // MULTIPLE CHOICE SPECIFIC - uses the subschema: optionSchema
   options: {
