@@ -11,7 +11,7 @@ export async function findAllAttempts() {
   return attempts;
 };
 
-export async function findAttemptById() {
+export async function findAttemptById(id) {
   const attempt = await model.findById(id);
   return attempt;
 };
@@ -40,5 +40,25 @@ export async function deleteAttempt() {
   const result = await model.findByIdAndDelete(id);
   return result;
 };
+
+export async function findNumberAttempts(userID, quizID) {
+    try {
+      const count = await model.countDocuments({ userId: userID, quizId: quizID });
+      return count;
+    } catch (error) {
+      console.error('Error counting attempts:', error);
+      throw error;
+    }
+  }
+
+  export async function findAttemptsByUserAndQuiz(userId, quizId) {
+    try {
+      const attempts = await model.find({ userId: userId, quizId: quizId }).exec();
+      return attempts;
+    } catch (error) {
+      console.error('Error fetching attempts by user and quiz:', error);
+      throw error;
+    }
+  }
 
 

@@ -41,6 +41,7 @@ export default function CourseRoutes(app) {
 
 
   app.post("/api/courses/:courseId/quizzes", async (req, res) => {
+    console.log("creating quiz");
     const { courseId } = req.params;
     const quiz = {
       ...req.body,
@@ -96,16 +97,6 @@ export default function CourseRoutes(app) {
   };
   app.get("/api/courses/:cid/quizzes", findQuizzesForCourse);
 
-
-  app.post("/api/courses/:courseId/quizzes", async (req, res) => {
-    const { courseId } = req.params;
-    const quiz = {
-      ...req.body,
-      course: courseId,
-    };
-    const newQuiz = await quizzesDao.createQuiz(quiz);
-    res.send(newQuiz);
-  });
 }
 
 
