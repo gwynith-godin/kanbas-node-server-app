@@ -18,6 +18,7 @@ const attemptSchema = new mongoose.Schema({
   endTime: {
     type: Date
   },
+  score: String,
   answers: [
     {
       questionId: {

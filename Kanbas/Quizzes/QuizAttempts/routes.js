@@ -2,7 +2,26 @@ import * as dao from "./dao.js";
 
 export default function QuizAttemptRoutes(app) {
 
-    
+    app.get('/api/quizzes/attempt/recent', async (req, res) => {
+        try {
+            const { userId, quizId } = req.query;
+
+            if (!userId || !quizId) {
+                return res.status(400).json({ error: "Missing userId or quizId in query parameters" });
+            }
+
+            const recentAttempt = await dao.findMostRecentAttempt(userId, quizId);
+
+            if (!recentAttempt) {
+                return res.status(404).json({ message: "No attempts found for this user and quiz." });
+            }
+
+            res.status(200).json(recentAttempt);
+        } catch (error) {
+            console.error("Error fetching the most recent attempt:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    });
 
 
     app.get('/api/quizzes/attempt/count', async (req, res) => {
@@ -109,6 +128,9 @@ export default function QuizAttemptRoutes(app) {
             res.status(500).json({ error: "Internal server error" });
         }
     });
+
+
+    
 
     
 

@@ -61,4 +61,16 @@ export async function findNumberAttempts(userID, quizID) {
     }
   }
 
+  export async function findMostRecentAttempt(userId, quizId) {
+    try {
+      const mostRecentAttempt = await model.findOne({ userId, quizId })
+        .sort({ createdAt: -1 })
+        .exec();
+      return mostRecentAttempt;
+    } catch (error) {
+      console.error('Error fetching the most recent attempt:', error);
+      throw error;
+    }
+  }
+
 

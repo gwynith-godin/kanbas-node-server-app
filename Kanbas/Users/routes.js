@@ -22,7 +22,7 @@ export default function UserRoutes(app) {
     const courses = await enrollmentsDao.findCoursesForUser(uid);
     res.json(courses);
   };
-  
+
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
     res.json(user);
@@ -31,9 +31,10 @@ export default function UserRoutes(app) {
   const deleteUser = async (req, res) => {
     const status = await dao.deleteUser(req.params.userId);
     res.json(status);
-};
-  
+  };
+
   const findAllUsers = async (req, res) => {
+    console.log("I am here:")
     const { role, name } = req.query;
     if (role) {
       const users = await dao.findUsersByRole(role);
@@ -45,28 +46,30 @@ export default function UserRoutes(app) {
       res.json(users);
       return;
     }
+    const users = await dao.findAllUsers();
+    res.json(users);
 
   };
 
-  const findUserById =  async (req, res) => {
+  const findUserById = async (req, res) => {
     const user = await dao.findUserById(req.params.userId);
     res.json(user);
   };
 
 
-  const updateUser = async (req, res) => { 
+  const updateUser = async (req, res) => {
     const userId = req.params.userId;
     const userUpdates = req.body;
     await dao.updateUser(userId, userUpdates);
     const currentUser = req.session["currentUser"];
     if (currentUser && currentUser._id === userId) {
       req.session["currentUser"] = { ...currentUser, ...userUpdates };
-    } 
+    }
     res.json(currentUser);
 
   };
-  const signup = async (req, res) => { 
-    const user =  await dao.findUserByUsername(req.body.username);
+  const signup = async (req, res) => {
+    const user = await dao.findUserByUsername(req.body.username);
     if (user) {
       res.status(400).json(
         { message: "Username already in use" });
@@ -78,6 +81,7 @@ export default function UserRoutes(app) {
   };
   const signin = async (req, res) => {
     const { username, password } = req.body;
+    console.log("signing in: ", username, password)
     const currentUser = await dao.findUserByCredentials(username, password);
     if (currentUser) {
       req.session["currentUser"] = currentUser;
@@ -87,17 +91,19 @@ export default function UserRoutes(app) {
     }
   };
 
-  const signout = (req, res) => { 
+  const signout = (req, res) => {
     req.session.destroy();
     res.sendStatus(200);
   };
 
-  const profile = (req, res) => { 
+  const profile = (req, res) => {
+    console.log('Session:', req.session)
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
       res.sendStatus(401);
       return;
     }
+    res.json(currentUser);
   };
 
   const findCoursesForEnrolledUser = (req, res) => {

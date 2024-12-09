@@ -32,6 +32,7 @@ const quizzesSchema = new mongoose.Schema(
       enum: ["Always", "Never"],
       default: "Always",
     },
+    published: Boolean,
     requireLockdownBrowser: {type: Boolean, default: false},
     requiredToViewResults: {type: Boolean, default: false},
     dueDate: Date,
