@@ -103,6 +103,7 @@ export default function QuizAttemptRoutes(app) {
             const { aid } = req.params;
             console.log(aid);
             const updatedData = req.body;
+            console.log(updatedData);
             const updatedAttempt = await dao.updateAttempt(aid, updatedData);
             if (!updatedAttempt) {
                 return res.status(404).json({ error: "Attempt not found" });

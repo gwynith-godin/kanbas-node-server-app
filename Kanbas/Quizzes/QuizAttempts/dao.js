@@ -22,6 +22,7 @@ export async function updateAttempt(id, attemptData) {
       return attempt;
     }
   
+    /* WAS USED FOR DETERMING CORRECTNESS.... PROBABLY BETTER DONE ON BACKEND IN THE REAL WORLD, BUT FOR NOW IM DOING IT FRONT END!!!
     for (let i = 0; i < attemptData.answers.length; i++) {
       const answer = attemptData.answers[i];
       const question = await QuestionModel.findById(answer.questionId);
@@ -32,7 +33,9 @@ export async function updateAttempt(id, attemptData) {
       }
         answer.correct = (answer.selectedOption === question.correctAnswer);
     }
-      const attempt = await model.findByIdAndUpdate(id, attemptData, { new: true });
+        */
+
+    const attempt = await model.findByIdAndUpdate(id, attemptData, { new: true });
     return attempt;
   };
 
