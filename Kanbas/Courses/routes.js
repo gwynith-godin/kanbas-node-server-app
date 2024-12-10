@@ -41,7 +41,7 @@ export default function CourseRoutes(app) {
 
 
   app.post("/api/courses/:courseId/quizzes", async (req, res) => {
-    console.log("creating quiz");
+    try {
     const { courseId } = req.params;
     const quiz = {
       ...req.body,
@@ -49,6 +49,11 @@ export default function CourseRoutes(app) {
     };
     const newQuiz = await quizzesDao.createQuiz(quiz);
     res.send(newQuiz);
+
+  } catch (error) {
+    console.log("Error creating quiz", error);
+    res.sendStatus(500);
+  }
   });
  
 
